@@ -1,1 +1,4 @@
 node_modules/
+package-lock.json
+.devcontainer/post-create.sh
+.devcontainer/post-start.sh

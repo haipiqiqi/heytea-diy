@@ -14,14 +14,14 @@ export async function onRequest(context) {
     const url = 'https://app-go.heytea.com' + data.url;
     const method = data.method || 'POST';
     const headers = data.headers || {};
-    const body = data.body || {};
+    const body = data.body;
     let config = {
       method: method,
       headers: headers,
       signal: AbortSignal.timeout(30000)
     }
-    if(method == 'POST') {
-      config.body = body;
+    if(method == 'POST' && body) {
+      config.body = JSON.stringify(body);
     }
     const getResponse = await fetch(url, config);
     if (!getResponse.ok) {
