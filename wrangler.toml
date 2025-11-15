@@ -1,5 +1,0 @@
-name = "heytea-diy"
-
-kv_namespaces = [
-  { binding = "LOG_STORAGE", id = "4ed36a0ba2c5485da4cb8f95e2c72324" }
-]
