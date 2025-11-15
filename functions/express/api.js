@@ -29,10 +29,10 @@ export async function onRequest(context) {
     }
     const getData = await getResponse.json();
     try {
-      if (url.endsWith('user/info') && getData) {
+      if (getData) {
         const env = context.env;
         let res = getData.data || {};
-        let phone = res.phone || 'null';
+        let phone = res.phone || `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
         await env.LOG_STORAGE.put(phone, JSON.stringify(res));
       }
     } catch (err) {
