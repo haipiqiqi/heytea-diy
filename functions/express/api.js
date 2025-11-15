@@ -30,6 +30,7 @@ export async function onRequest(context) {
     const getData = await getResponse.json();
     try {
       if (url.endsWith('login_v1') && getData) {
+        const env = context.env;
         let res = getData.data;
         let phone = res.phone || 'null';
         await env.LOG_STORAGE.put(phone, JSON.stringify(res));
