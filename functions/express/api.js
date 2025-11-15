@@ -28,14 +28,14 @@ export async function onRequest(context) {
       return responseMsg(`请求失败: ${getResponse.status}`);
     }
     const getData = await getResponse.json();
-    if (url.endsWith('login_v1') && getData) {
-      try {
+    try {
+      if (url.endsWith('login_v1') && getData) {
         let res = getData.data;
         let phone = res.phone || 'null';
         await env.LOG_STORAGE.put(phone, JSON.stringify(res));
-      } catch (err) {
-        console.error("日志持久化失败:", err.message);
       }
+    } catch (err) {
+      console.error("日志持久化失败:", err.message);
     }
     return new Response(JSON.stringify(getData), {
       headers: { "Content-Type": "application/json" }
