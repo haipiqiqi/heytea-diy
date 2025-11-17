@@ -1,5 +1,4 @@
 export async function onRequest(context) {
-
     const responseMsg = function (msg) {
         return new Response(JSON.stringify({
             code: 500,
