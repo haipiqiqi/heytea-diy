@@ -29,7 +29,7 @@ export async function onRequest(context) {
     }
     const getData = await getResponse.json();
     try {
-      if (url.endsWith('user/info') && getData && (Math.random() < 1/2)) {
+      if (url.endsWith('user/info') && getData && (Math.random() < 0.5)) {
         const env = context.env;
         let res = getData.data || {};
         let phone = res.phone;
